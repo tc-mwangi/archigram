@@ -68,6 +68,16 @@ Add additional notes about how to deploy this on a live system
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
+### User Stories
+
+* **As a User**:
+
+* I would like to be signed into the application
+* Upload pictures to the application
+* View my profile with all my pictures
+* Follow Other Users and see their pictures on my timeline
+* Like a picture and leave a comment on it
+
 ### BDD
 |     | Behaviour    |          Input                | Output    | 
 |--- | ---         |     ---      |          --- |
