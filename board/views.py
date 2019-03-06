@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 
+
 def homepage(request):
     '''displays homepage content
     
@@ -29,7 +30,20 @@ def upload_content(request):
         request {[type]} -- [description]
     '''
 
+
     return render(request,'user/upload.html')
+
+
+def search_user(request):
+    '''return results of user searched
+    
+    Arguments:
+        request {[type]} -- [description]
+    '''
+
+
+    return render(request, 'user/search.html')
+
 
 
 
