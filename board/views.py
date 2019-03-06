@@ -2,15 +2,15 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404, HttpResponseRedirect
 
 
-def homepage(request):
-    '''displays homepage content
+def timeline(request):
+    '''displays timeline content
     
     Arguments:
         request {[type]} -- [description]
     '''
 
 
-    return render(request,'main/landing.html')
+    return render(request,'main/timeline.html')
 
 
 def user_profile(request):
