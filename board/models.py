@@ -2,7 +2,7 @@ from django.db import models
 import datetime as datetime
 from django import forms
 from django.contrib.auth.models import User
-from tinymce.models import HTMLField
+# from tinymce.models import HTMLField
 
 
 class Profile(models.Model):
@@ -13,7 +13,7 @@ class Profile(models.Model):
     '''
 
     profile_pic = models.ImageField(upload_to='profiles/', null=True)
-    bio = HTMLField()
+    # bio = HTMLField()
 
 
 class tags(models.Model):
