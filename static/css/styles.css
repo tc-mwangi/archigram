@@ -9,17 +9,26 @@
     
     position: relative;
     top: 0%;
-    left: 50%;  
+    left: 25%;  
+    right:0%;
     overflow-y: scroll;
+    background-color: #696969;
 }
 /* main columns */
 
 /* main logo */
-.main-logo{
-    font-family : Poppins;
-	font-size : 120px;
-	color : #000000;
-	color : rgb(0, 0, 0);
+.main-logo-archi{
+    font-family: Poppins;
+    font-weight: 900; 
+    float: right;  
+    font-size: 100px;
+}
+
+.main-logo-gram{
+    font-family: Poppins;
+    font-weight: 900; 
+    float: left;  
+    font-size: 100px;
 }
 
 
