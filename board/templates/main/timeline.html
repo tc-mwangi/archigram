@@ -1,7 +1,16 @@
 {%extends 'main/base.html'%}
+{%load bootstrap4%}
 
 {%block content%}
+{{block.supper}}
 
-    This is my timeline
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4" id="aside-column">col4</div>
+            <div class="col-lg-8" id="main-column">col8</div>
+        </div>
+    </div>
+</body>  
 
 {%endblock%}
