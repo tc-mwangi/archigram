@@ -1,8 +1,27 @@
-#still-column{
-    background-color: #E52712
 
+/* main columns */
+#still-column{
+    position: fixed;
+    top: 0%;
+    left: 0%;
 }
 #scrolling-column{
-    background-color: #292929
-
+    
+    position: relative;
+    top: 0%;
+    left: 50%;  
+    overflow-y: scroll;
 }
+/* main columns */
+
+/* main logo */
+.main-logo{
+    font-family : Poppins;
+	font-size : 120px;
+	color : #000000;
+	color : rgb(0, 0, 0);
+}
+
+
+
+

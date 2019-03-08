@@ -12,14 +12,24 @@ charleston green: #292929
 /* Set main columns */
 
 #still-column{
-    background-color: #E52712
-
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    background-color: #FF5951; 
 }
+
 #scrolling-column{
-    background-color: #292929
+    background-color: #292929;
+    position: relative;
+    top: 0%;
+    left: 50%;  
+    overflow-y: scroll;
 
 }
 
 
 
 /* End set main columns */
+
+
+
