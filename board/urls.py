@@ -9,6 +9,8 @@ urlpatterns=[
     url(r'^upload/', views.upload_content, name='upload_content'),
     url(r'^search/', views.search_user, name='search_user'),
     url(r'^modal/', views.view_modal, name='view_modal'),
+    url(r'^followers/', views.followers, name='followers'),
+    url(r'^following/', views.following, name='following'),
     ]
 
 if settings.DEBUG:

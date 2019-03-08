@@ -55,5 +55,25 @@ def view_modal(request):
     return render(request, 'user/modal.html')
 
 
+def followers(request):
+    '''returns image modal
+    
+    Arguments:
+        request {[type]} -- [description]
+    '''
+
+    return render(request, 'user/followers.html')
+
+
+def following(request):
+    '''returns image modal
+    
+    Arguments:
+        request {[type]} -- [description]
+    '''
+
+    return render(request, 'user/following.html')
+
+
 
 
