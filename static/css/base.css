@@ -10,6 +10,7 @@ charleston green: #292929
 body{
     font-family: 'Poppins', sans-serif;
     font-size: 50px;
+    color: cyan;
 }
 
 /* Set main columns */
