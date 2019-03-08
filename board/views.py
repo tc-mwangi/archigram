@@ -45,7 +45,7 @@ def search_user(request):
     return render(request, 'user/search.html')
 
 
-def image_modal(request):
+def view_modal(request):
     '''returns image modal
     
     Arguments:

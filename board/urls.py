@@ -8,6 +8,7 @@ urlpatterns=[
     url(r'^profile/', views.user_profile, name='user_profile'),
     url(r'^upload/', views.upload_content, name='upload_content'),
     url(r'^search/', views.search_user, name='search_user'),
+    url(r'^modal/', views.view_modal, name='view_modal'),
     ]
 
 if settings.DEBUG:
