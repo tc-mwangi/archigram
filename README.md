@@ -4,9 +4,9 @@ View, Post, Follow, Share, Comment and Like on all images Architectural.
 
 ## Screenshots
 
-![image](https://github.com/tc-mwangi/shutterbugg-Django/blob/master/static/screenshots/screencapture-figma-proto-YY7ptjpqnZURS5wsZkVD1I4M-Untitled-2019-03-05-07_48_20%20copy.png)
+![image]()
 
-![image](https://github.com/tc-mwangi/shutterbugg-Django/blob/master/static/screenshots/screencapture-figma-proto-YY7ptjpqnZURS5wsZkVD1I4M-Untitled-2019-03-05-07_51_51%20copy.png)
+![image]()
 
 ## Getting Started
 
