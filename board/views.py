@@ -75,5 +75,15 @@ def following(request):
     return render(request, 'user/following.html')
 
 
+def post(request):
+    '''returns image modal
+    
+    Arguments:
+        request {[type]} -- [description]
+    '''
+
+    return render(request, 'user/upload.html')
+
+
 
 

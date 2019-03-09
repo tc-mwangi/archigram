@@ -11,6 +11,7 @@ urlpatterns=[
     url(r'^modal/', views.view_modal, name='view_modal'),
     url(r'^followers/', views.followers, name='followers'),
     url(r'^following/', views.following, name='following'),
+    url(r'^post/', views.post, name='post'),
     ]
 
 if settings.DEBUG:
