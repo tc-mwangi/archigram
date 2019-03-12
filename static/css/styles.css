@@ -1,6 +1,6 @@
 /* colors 
-lust: #E52712
-charleston green: #292929
+dust storm: #F2D0C9;
+platinate blue: #1B42D8;
 
 /* end colors */
 
@@ -11,15 +11,16 @@ charleston green: #292929
     position: fixed;
     top: 0%;
     left: 0%;
+    background-color: #1B42D8;
+    
 }
 #scrolling-column{
     
     position: relative;
     top: 0%;
-    left: 25%;  
-    right:0%;
+    left: 50%;  
     overflow-y: scroll;
-    background-color: #696969;
+    background-color: #F2D0C9;
 }
 /* main columns */
 
@@ -29,6 +30,7 @@ charleston green: #292929
     font-weight: 900; 
     float: right;  
     font-size: 100px;
+    color: #1B42D8;
 }
 
 .main-logo-gram{
@@ -36,6 +38,15 @@ charleston green: #292929
     font-weight: 900; 
     float: left;  
     font-size: 100px;
+    color: #1B42D8;
+}
+
+#auth{
+    font-family: Poppins;
+    font-weight: 900; 
+    font-size: 50px;
+    color: #1B42D8;
+
 }
 
 
