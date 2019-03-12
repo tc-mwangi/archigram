@@ -1,28 +1,47 @@
-from django.shortcuts import render, redirect
-from django.http import HttpResponse, Http404, HttpResponseRedirect
+from django.shortcuts import render,redirect,get_object_or_404
+from . forms import ProfileUploadForm,CommentForm,ProfileForm
+from django.http  import HttpResponse
+from . models import Pic ,Profile, Likes, Follow, Comment
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 
 
-# @login_required(login_url='/accounts/login/')
+
+
+
+
+
+
+
+@login_required(login_url='/accounts/login/')
 def timeline(request):
     '''displays timeline content
     
     Arguments:
         request {[type]} -- [description]
     '''
+    pic_posts = Pic.objects.all()
+    title = "archigram"
 
 
-    return render(request,'main/timeline.html')
+    return render(request,'main/timeline.html', {"title":title,"pic_posts":pic_posts})
 
-# @login_required(login_url='/accounts/login/')
+
+
+@login_required(login_url='/accounts/login/')
 def user_profile(request):
     '''displays profile page content
     
     Arguments:
         request {[type]} -- [description]
     '''
+    current_user = request.user
+    profile = Profile.objects.all()
+    follower = Follow.objects.filter(user = profile)
 
-    return render(request,'user/profile.html')
+    return render(request, 'user/profile.html',{"current_user":current_user,"profile":profile,"follower":follower})
+
+
 
 
 def upload_content(request):

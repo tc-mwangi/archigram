@@ -101,7 +101,7 @@ class Follow(models.Model):
 
 class Likes(models.Model):
 	user = models.ForeignKey(Profile,null=True)
-	# pic = models.ForeignKey(Pic,null=True)
+	
 
 	def __int__(self):
 		return self.name
