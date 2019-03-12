@@ -1,9 +1,12 @@
 from django.conf.urls import url
-
+from django.conf import settings
+from django.conf.urls.static import static
+from . import views
 from .views import ajax
 from .views import general
 
 app_name = 'board'
+
 urlpatterns = [
     url(r'^$', general.index, name='index'),
     url(r'^login/$', general.user_login, name='user_login'),
@@ -29,3 +32,8 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+
+
+
+
