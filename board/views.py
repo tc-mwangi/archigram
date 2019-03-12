@@ -13,11 +13,17 @@ def timeline(request):
     Arguments:
         request {[type]} -- [description]
     '''
-    pic_posts = Pic.objects.all()
-    title = "archigram"
+
+    title = "timeline"
+    current_user = request.user
+    pic_posts = Pic.objects.all()  
+    my_profile = Profile.objects.order_by('-time_uploaded')
+    comments = Comment.objects.order_by('-time_comment')
 
 
-    return render(request,'main/timeline.html', {"title":title,"pic_posts":pic_posts})
+    return render(request,'main/timeline.html', {"title":title,"pic_posts":pic_posts, "my_profile": my_profile, "comments":comments})
+
+
 
 
 @login_required(login_url='/accounts/login/')
@@ -35,7 +41,40 @@ def user_profile(request):
 
 
 
-def upload_content(request):
+@login_required(login_url='/accounts/login/')
+def upload_profile(request):
+    current_user = request.user 
+    title = 'Upload Profile'
+    try:
+        requested_profile = Profile.objects.get(user_id = current_user.id)
+        if request.method == 'POST':
+            form = ProfileUploadForm(request.POST,request.FILES)
+
+            if form.is_valid():
+                requested_profile.profile_pic = form.cleaned_data['profile_pic']
+                requested_profile.bio = form.cleaned_data['bio']
+                requested_profile.username = form.cleaned_data['username']
+                requested_profile.save_profile()
+                return redirect( user_profile )
+        else:
+            form = ProfileUploadForm()
+    except:
+        if request.method == 'POST':
+            form = ProfileUploadForm(request.POST,request.FILES)
+
+            if form.is_valid():
+                new_profile = Profile(profile_pic = form.cleaned_data['profile_pic'],bio = form.cleaned_data['bio'],username = form.cleaned_data['username'])
+                new_profile.save_profile()
+                return redirect( user_profile )
+        else:
+            form = ProfileUploadForm()
+
+
+    return render(request,'upload_profile.html',{"title":title,"current_user":current_user,"form":form})
+
+
+
+def upload_pic(request):
     '''[summary]
     
     Arguments:
@@ -47,7 +86,7 @@ def upload_content(request):
 
 
 @login_required(login_url='/accounts/login/')
-def comment(request,id):
+def comment(request, id):
 	
 	post = get_object_or_404(Pic,id=id)	
 	current_user = request.user
@@ -67,6 +106,20 @@ def comment(request,id):
 	return render(request,'comment.html', {"form":form}) 
 
 
+@login_required(login_url='/accounts/login/')
+def like(request,pic_id):
+    '''tally and display likes
+    
+    Arguments:
+        request {[type]} -- [description]
+        pic_id {[type]} -- [description]
+    '''
+
+    Pic = Pic.objects.get(id=pic_id)
+    like +=1
+    save_like()
+
+    return redirect(timeline)
 
 
 
