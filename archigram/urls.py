@@ -20,11 +20,11 @@ from django.contrib.auth import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from board.views import general
+from board.views import views
 
 
 urlpatterns = [
-    url(r'^$', general.index, name='instaindex'),
+    url(r'^$', views.index, name='instaindex'),
     url(r'^admin/', admin.site.urls),
     url(r'^insta/', include('board.urls')),
     url(r'^accounts/', include('registration.backends.simple.urls')),
