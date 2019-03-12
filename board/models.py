@@ -2,7 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from tinymce.models import HTMLField
 
-# Create your models here.
+
+
 class Pic(models.Model):
     pic = models.ImageField(upload_to = "pics/",null = True)
     user = models.ForeignKey(User,null=True)
@@ -48,6 +49,7 @@ class Pic(models.Model):
     def save_profile(self):
     	self.save()
 
+
 class Profile(models.Model):
 	username = models.CharField(default='User',max_length=30)
 	profile_pic = models.ImageField(upload_to = "profile/",null=True)
@@ -83,6 +85,7 @@ class Comment(models.Model):
 
 	def save_comment(self):
 		self.save()
+
 
 class Follow(models.Model):
 	user = models.ForeignKey(Profile,null=True)

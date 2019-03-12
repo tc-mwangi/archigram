@@ -20,3 +20,9 @@ class CommentForm(forms.ModelForm):
 	class Meta:
 		model = Comment	
 		exclude = ['user','pic',]
+
+
+class ImageForm(forms.ModelForm):
+	class Meta:
+		model = Pic
+		profile_pic = forms.ImageField(label = 'Image Field')

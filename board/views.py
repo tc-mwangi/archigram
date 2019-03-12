@@ -73,16 +73,28 @@ def upload_profile(request):
     return render(request,'upload_profile.html',{"title":title,"current_user":current_user,"form":form})
 
 
-
-def upload_pic(request):
-    '''[summary]
-    
-    Arguments:
-        request {[type]} -- [description]
+@login_required(login_url='/accounts/login/')
+def send(request):
     '''
+    display form for uploading images
+    '''
+    current_user = request.user
 
+    if request.method == 'POST':
 
-    return render(request,'user/upload.html')
+        form = ImageForm(request.POST ,request.FILES)
+
+        if form.is_valid():
+            image = form.save(commit = False)
+            image.user_key = current_user
+            image.likes +=0
+            image.save() 
+
+            return redirect( timeline)
+    else:
+        form = ImageForm() 
+    return render(request, 'user/upload.html',{"form" : form})
+
 
 
 @login_required(login_url='/accounts/login/')
