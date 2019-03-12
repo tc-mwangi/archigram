@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from board.forms import LoginForm, PhotoForm, MemberPhotoForm
-from board.models import Follow, Photo, Member, Comment, Like
+from board.models import Photo, Member, Follow, Comment, Like
 
 
 def index():
