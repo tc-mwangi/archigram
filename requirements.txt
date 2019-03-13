@@ -1,5 +1,6 @@
 confusable-homoglyphs==3.2.0
 Django==1.11.17
+django-annoying==0.10.4
 django-bootstrap4==0.0.7
 django-fontawesome==1.0
 django-registration==2.4.1

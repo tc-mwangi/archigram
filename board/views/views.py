@@ -17,7 +17,7 @@ def index(request):
     '''
 
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/insta/feed')
+        return HttpResponseRedirect('/insta/profile')
     
 
     return render(request, 'boardapp/index.html', {})
@@ -192,15 +192,34 @@ def search(request):
 
 
 
-def see(request):
-    '''displays users that user followers
+def see(request,username=None):
+    '''displays logged in user's customized navbar options
     '''
-    title="title"
+    if username is None:
+        user = request.user
+
+    else:
+        user = User.objects.get(username=username)
+
+    dp_obj = get_object_or_None(Member, user__pk=user.id)
+    if dp_obj is None:
+        user_dp = False
+    else:
+        user_dp = dp_obj
+
+    user_photos = Photo.objects.filter(author__pk = user.id)
 
     
 
-    return render(request, 'boardapp/see.html', {"title":title})
+    return render(request, 'boardapp/navbar.html', {
+        'user': user,
+        'user_dp': user_dp,
+        'photos': user_photos,
+        })
 
 
+
+
+   
 
 
