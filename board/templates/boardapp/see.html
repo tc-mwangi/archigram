@@ -1,0 +1,42 @@
+{%extends 'main/base.html'%}
+{%load bootstrap4%}
+{% load static %}
+
+{%block content%}
+{{block.supper}}
+
+
+<!-- Grid row -->
+<div class="row">
+       
+      
+          <!--Card Regular-->
+          <div class="card card-cascade">
+      
+            <!--Card image-->
+            <div class="view view-cascade overlay">
+              <img src="https://mdbootstrap.com/img/Photos/Others/men.jpg" class="card-img-top" alt="user_pic">
+              <a>
+                <div class="mask rgba-white-slight"></div>
+              </a>
+            </div>
+            <!--/.Card image-->
+      
+            <!--Card content-->
+            <div class="card-body card-body-cascade text-center">
+              <!--Title-->
+              <h4 class="card-title"><strong>Username</strong></h4>
+              <h5>@username</h5>
+      
+              <p class="card-text">bio
+              </p>
+      
+              <!--Follow Button-->
+              <a type="button" class="btn-floating btn-small btn-fb"><i class="fas fa-plus"></i><br>follow</a>
+            </div>
+            <!--/.Card content-->
+      
+          </div>
+          <!--/.Card Regular-->
+      
+{%endblock%}

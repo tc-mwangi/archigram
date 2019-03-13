@@ -42,6 +42,7 @@ def feed(request):
         'liked_photos': liked_photos
         })
 
+
 @login_required(login_url='/accounts/login')
 def users(request):
     '''displays a list of registered users
@@ -87,9 +88,19 @@ def upload_photo(request):
 
 
 @login_required(login_url='/accounts/login')
-def user_profile(request):
-    '''displays users's profile details
+def user_profile(request, username=None):
+    '''display the `logged user's` profile and uploaded photos
+    
+    Arguments:
+        request {[type]} -- [description]
+    
+    Keyword Arguments:
+        username {[type]} -- [description] (default: {None})
+    
+    Returns:
+        [type] -- [description]
     '''
+
 
     upload_prof_pic_form = MemberPhotoForm()
 
@@ -105,7 +116,7 @@ def user_profile(request):
     else:
         user_dp = dp_obj
 
-    user_photos = Photo.objects.filter(owner__pk=user.id)
+    user_photos = Photo.objects.filter(author__pk = user.id)
     photos_count = user_photos.count()
     return render(request, 'boardapp/profile.html', {
         'user': user,
@@ -179,6 +190,17 @@ def search(request):
         'results': results,
         'followlist': followlist
         })
+
+
+
+def see(request):
+    '''displays users that user followers
+    '''
+    title="title"
+
+    
+
+    return render(request, 'boardapp/see.html', {"title":title})
 
 
 

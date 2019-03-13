@@ -1,7 +1,3 @@
-
-
-
-
 import json, itertools
 
 from django.shortcuts import render
@@ -13,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from board.forms import LoginForm, PhotoForm, MemberPhotoForm
 from board.models import Follow, Photo, Member, Comment, Like
 
+from annoying.functions import get_object_or_None
 
 # Create your views here.
 
@@ -101,7 +98,6 @@ def upload_user_profile_pic(request):
     return HttpResponse(data, content_type='application/json')
 
 
-
 def post_photo_comment(request):
     data = {
         'status': 0
@@ -121,6 +117,8 @@ def post_photo_comment(request):
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
+
+
 
 def like_photo(request):
     data = {
@@ -148,5 +146,3 @@ def like_photo(request):
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
-
-

@@ -16,8 +16,11 @@ urlpatterns = [
     url(r'^followers/$', views.follower, name='follower'),
     url(r'^feed/$', views.feed, name='feed'),
     url(r'^search/$', views.search, name='user_search'),
+    url(r'^see/$', views.see, name='see'),
 
-    # AJAX methods
+
+
+    # AJAX methods for uploads, follow, and comments
     url(r'^upload_dp/$', ajax.upload_user_profile_pic,
         name='upload_user_profile_pic'),
     url(r'^follow/$', ajax.follow_user, name='follow_user'),
@@ -25,7 +28,6 @@ urlpatterns = [
     url(r'^post_comment/$', ajax.post_photo_comment, name='post_photo_comment'),
     url(r'^like_comment/$', ajax.like_photo, name='like_photo'),
 ]
-
 
 if settings.DEBUG:
     urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

@@ -12,11 +12,11 @@
             <div class="col-sm-4">
 
                 {% if user_dp %}
-                    <img src="{{ MEDIA_URL }}{{user_dp.image.url}}" alt="dp" class="img-thumbnail img-responsive">
+                    <img src="{{user_dp.image.url}}" alt="dp" class="img-thumbnail img-responsive">
                 {% else %}
                     <img src="" alt="dp" class="img-thumbnail img-responsive">
                 {% endif %}
-                <form id="uploadDp" action="{% url 'instaapp:upload_user_profile_pic' %}" method="post" enctype="multipart/form-data">
+                <form id="uploadDp" action="{% url 'upload_user_profile_pic' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{dp_form}}
                     <button type="submit" class="btn btn-primary">
