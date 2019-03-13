@@ -81,7 +81,7 @@ def upload_photo(request):
             obj.author = user_posting
             obj.save()
 
-            return HttpResponseRedirect('/insta/upload')
+            return HttpResponseRedirect('/insta/profile')
     else:
         form = PhotoForm()
 
