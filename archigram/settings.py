@@ -136,7 +136,7 @@ MEDIA_URL = '/uploads/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-LOGIN_REDIRECT_URL = '/insta/feed'
+LOGIN_REDIRECT_URL = '/insta/profile'
 LOGIN_URL = '/index'
 
 
