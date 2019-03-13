@@ -1,4 +1,9 @@
+{%extends 'main/base.html'%}
+{%load bootstrap4%}
 {% load static %}
+
+{%block content%}
+{{block.supper}}
 
 <div id="content" class="container">
     <div class="col-sm-6 col-sm-offset-3">
@@ -96,11 +101,13 @@
             {% endfor %}
         {% else %}
             <div class="alert alert-info">
-                You are not following any users. <a href="{% url 'instaapp:users' %}">Follow</a> users to view photos.
+                You are not following any users. <a href="{% url 'users' %}">Follow</a> users to view photos.
             </div>
         {% endif %}
 
     </div>
 
 </div>
+
+{%endblock%}
 

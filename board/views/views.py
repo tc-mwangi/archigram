@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from board.forms import LoginForm, PhotoForm, MemberPhotoForm
 from board.models import Photo, Member, Follow, Comment, Like
 
+from annoying.functions import get_object_or_None
 
 def index(request):
     '''displays index page
@@ -20,7 +21,7 @@ def index(request):
     return render(request, 'boardapp/index.html', {})
 
 
-@login_required
+@login_required(login_url='/accounts/login')
 def feed(request):
     '''displays photo thread of following user's posts, and users posts too.
     '''
@@ -36,13 +37,34 @@ def feed(request):
         if following_photos is not None:
             photos.append(following_photos)
 
-    return render(request, 'board/feed.html', {
+    return render(request, 'boardapp/feed.html', {
         'photos': photos,
         'liked_photos': liked_photos
         })
 
+@login_required(login_url='/accounts/login')
+def users(request):
+    '''displays a list of registered users
+    '''
+    userlist = []
+    users = User.objects.all()
 
-# @login_required(login_url='/accounts/login')
+    for user in users:
+        queryset = Follow.objects.filter(
+                            follower__pk=request.user.id,
+                            following__pk=user.pk,
+                            
+                            )
+        follow_status = get_object_or_None(queryset)
+
+        if follow_status is None:
+            userlist.append(user)
+
+    return render(request, 'boardapp/users.html', {'users': userlist})
+
+
+
+@login_required(login_url='/accounts/login')
 def upload_photo(request):
     '''diplays image upload form, allows user to upload photo
     '''
@@ -64,7 +86,7 @@ def upload_photo(request):
     return render(request, 'boardapp/upload_photo.html', {'form': form})
 
 
-#@login_required(login_url='/accounts/login')
+@login_required(login_url='/accounts/login')
 def user_profile(request):
     '''displays users's profile details
     '''
@@ -85,7 +107,7 @@ def user_profile(request):
 
     user_photos = Photo.objects.filter(owner__pk=user.id)
     photos_count = user_photos.count()
-    return render(request, 'board/profile.html', {
+    return render(request, 'boardapp/profile.html', {
         'user': user,
         'user_dp': user_dp,
         'photos': user_photos,
@@ -93,45 +115,25 @@ def user_profile(request):
         'dp_form': upload_prof_pic_form
         })
 
-#@login_required(login_url='/accounts/login')
-def users(request):
-    '''displays a list of registered users
-    '''
 
 
-    userlist = []
-    users = User.objects.all()[:9]
 
-    for user in users:
-        queryset = Follow.objects.filter(
-                            follower__pk=request.user.id,
-                            following__pk=user.pk,
-                            active=True
-                            )
-        follow_status = get_object_or_None(queryset)
-
-        if follow_status is None:
-            userlist.append(user)
-
-    return render(request, 'boardapp/users.html', {'users': userlist})
-
-
-#@login_required(login_url='/accounts/login')
-def user_following(request):
+@login_required(login_url='/accounts/login')
+def following(request):
     '''displays users that user followers
     '''
 
     user = request.user
 
-    following = Follow.objects.filter(follower__pk=user.id, active=True)
+    following = Follow.objects.filter(follower__pk=user.id)
 
-    return render(request, 'boardapp/user_following.html', {
+    return render(request, 'boardapp/following.html', {
         'following': following
         })
 
 
-#@login_required(login_url='/accounts/login')
-def user_followers(request):
+@login_required(login_url='/accounts/login')
+def follower(request):
     '''displays users that follow the logged in user
     '''
 
@@ -146,7 +148,7 @@ def user_followers(request):
         user.is_followed = get_object_or_None(queryset)
 
 
-    return render(request, 'boardapp/user_followers.html', {
+    return render(request, 'boardapp/followers.html', {
         'followers': followers,
         })
 

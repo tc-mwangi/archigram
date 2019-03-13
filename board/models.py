@@ -45,6 +45,7 @@ class Follow(models.Model):
 	follower = models.ForeignKey(User, related_name='+', null=True)
 	following = models.ForeignKey(User,related_name='+', null=True)
 	
+	
 
 	def get_follower(self):
 		return self.follower

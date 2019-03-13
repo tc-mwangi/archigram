@@ -1,6 +1,11 @@
-{% load staticfiles %}
-{% include 'instaapp/includes/head.html' %}
-{% include 'instaapp/includes/nav.html' %}
+{%extends 'main/base.html'%}
+{%load bootstrap4%}
+{% load static %}
+
+{%block content%}
+{{block.supper}}
+
+
 <div id="content" class="container">
     <div class="col-sm-6 col-sm-offset-3 users-list">
         <h1>Users who Follow you</h1>
@@ -39,5 +44,7 @@
         {% endif %}
     </div>
 </div>
-{% include 'instaapp/includes/foot.html' %}
-<script src="{% static "instaapp/js/follow.js" %}"></script>
+
+
+{%endblock%}
+

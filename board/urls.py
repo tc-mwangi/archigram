@@ -12,8 +12,8 @@ urlpatterns = [
     url(r'^users/$', views.users, name='users'),
     url(r'^u/(?P<username>[\w-]+)$', views.user_profile, name='user_view'),
     url(r'^profile/$', views.user_profile, name='user_profile'),
-    url(r'^following/$', views.user_following, name='user_following'),
-    url(r'^followers/$', views.user_followers, name='user_followers'),
+    url(r'^following/$', views.following, name='following'),
+    url(r'^followers/$', views.follower, name='follower'),
     url(r'^feed/$', views.feed, name='feed'),
     url(r'^search/$', views.search, name='user_search'),
 
