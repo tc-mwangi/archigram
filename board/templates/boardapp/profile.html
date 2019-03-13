@@ -14,8 +14,11 @@
                 {% if user_dp %}
                     <img src="{{user_dp.image.url}}" alt="dp" class="img-thumbnail img-responsive">
                 {% else %}
-                    <img src="" alt="dp" class="img-thumbnail img-responsive">
+                    <img src="{%static 'user.png'%}" alt="dp" class="img-thumbnail img-responsive">
                 {% endif %}
+
+
+
                 <form id="uploadDp" action="{% url 'upload_user_profile_pic' %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{dp_form}}
@@ -23,6 +26,9 @@
                         Upload
                     </button>
                 </form>
+
+
+
             </div>
             <div class="col-sm-8">
                 <h1>@{{user.username}} <small>{{user.first_name}} {{user.last_name}}</small></h1>
@@ -33,7 +39,7 @@
             <hr>
             {% for photo in photos %}
                 <div class="col-sm-3">
-                    <img class="img-responsive img-rounded" src="{{ MEDIA_URL }}{{photo.image.url}}" alt="{{photo.caption}}" title="{{photo.caption}}"/>
+                    <img class="img-responsive img-rounded" src="{{photo.image.url}}" alt="{{photo.caption}}" title="{{photo.caption}}" height="100"/>
                 </div>
             {% endfor %}
         </div>
@@ -43,3 +49,89 @@
 
 {%endblock%}
 
+
+
+        <!-- Intro -->
+        <section class="view">
+      
+                <div class="row">
+            
+                  <div class="col-md-6">
+                      <!-- <h1>Followers</h1> -->
+                                <!--Beginning of card-->
+        <div class="" id="user_block">
+          <div class="card card-cascade">
+                {% if user_dp %}
+                <!--Card image-->
+                <div class="view view-cascade overlay">
+                  <img src="{{user_dp.image.url}}" class="card-img-top" alt="user_pic">
+                  <a>
+                    <div class="mask rgba-white-slight"></div>
+                  </a>
+                </div>
+                <!--/.Card image-->
+                {% else %}
+                <!--Default Card image-->
+                <div class="view view-cascade overlay">
+                        <img src="{%static 'user.png'%}" class="card-img-top" alt="user_pic">
+                        <a>
+                          <div class="mask rgba-white-slight"></div>
+                        </a>
+                      </div>
+                      <!--/.Card image-->
+                      {%endif%}
+
+
+
+
+          
+                <!--Card content-->
+                <div class="card-body card-body-cascade text-center">
+                  <!--Title-->
+                  <h4 class="card-title"><strong>@{{user.username}}</strong></h4>
+                  <h5>{{user.first_name}}</h5>
+                  <h5>{{user.last_name}}</h5>
+          
+                  <p class="card-text">no. followers, no. following
+                    
+                <p class="card-text">{{count}} posts</p>
+          
+                  <!--Follow Button-->
+                  <a type="button" class="btn-floating btn-small btn-fb"><i class="fas fa-plus"></i><br></a>
+                  <br>
+                  <a type="button" class="btn-floating btn-small btn-fb"><i class="fas fa-minus"></i></i><br></a>
+                </div>
+                <!--/.Card content-->
+          
+              </div>
+              <!--/End of Card-->
+                      
+                    
+            
+            </div>
+        </div>
+            
+                  <div class="col-md-6">
+                       
+                        <div class="row">
+                                <hr>
+                                {% for photo in photos %}
+                                    <div class="col-sm-3">
+                                        <img class="img-responsive img-rounded" src="{{photo.image.url}}" alt="{{photo.caption}}" title="{{photo.caption}}" height="100"/>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        
+            
+                    
+            
+                  </div>
+            
+                </div>
+            
+              </section>
+              <!-- Intro -->
+
+
+
+            
