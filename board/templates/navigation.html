@@ -2,8 +2,9 @@
 
 <!--Navbar -->
 <nav class="mb-1 navbar navbar-expand-lg ">
-        <a class="navbar-brand" href="{% url 'timeline' %}">
-            <img src="{%static 'logo-05.png'%}" height="100" alt="mdb logo">
+        
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{%static 'main-logo-06.png'%}" height="100" alt="mdb logo">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
           aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,36 +12,66 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
                 
-                
+        {% if user.is_authenticated %}
           <ul class="navbar-nav ml-auto nav-flex-icons">
             
             <li class="nav-item avatar dropdown">
               <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-                <img src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg" class="rounded-circle z-depth-0" alt="avatar image">
+                
               </a>
 
               
               <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
-                   
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Post</a>
-                <a class="dropdown-item" href="#">Logout</a>
+                <a class="dropdown-item" href="{% url 'feed' %}">Timeline</a>   
+                <a class="dropdown-item" href="{% url 'user_profile' %}">Profile</a>
+                <a class="dropdown-item" href="{% url 'upload_photo' %}">Upload Photo</a>
+                <a class="dropdown-item" href="/accounts/password/change">Change Password</a>
+                <a class="dropdown-item" href="user_search">Search</a>
+                <a class="dropdown-item" href="/logout">Logout</a>
+                
               </div>
             </li>
 
 
           </ul>
+
+          {%else%}
+          <ul class="navbar-nav ml-auto nav-flex-icons">
+            
+              <li class="nav-item avatar dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
+                  aria-expanded="false">
+                  
+                </a>
+    
+                
+                <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
+                    <a class="dropdown-item" href="/accounts/register">Register</a>
+                    <a class="dropdown-item" href="/accounts/login">Login</a>
+    
+                  
+                </div>
+              </li>
+    
+    
+            </ul>
+          {%endif%}
           
-          <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
-                <a class="dropdown-item" href="#">Register</a>
-                <a class="dropdown-item" href="#">Logout</a>
-              </div>
           
        
         </div>
       </nav>
       <!--/.Navbar -->
+
+
+
+
+
+
+
+
+
 
           
 

@@ -3,13 +3,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 from . import views
 from .views import views
+from .views import ajax
 
-app_name = 'board'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
-    # url(r'^login/$', views.user_login, name='user_login'),
-    # url(r'^logout/$', views.user_logout, name='user_logout'),
     url(r'^upload/$', views.upload_photo, name='upload_photo'),
     url(r'^users/$', views.users, name='users'),
     url(r'^u/(?P<username>[\w-]+)$', views.user_profile, name='user_view'),
@@ -20,12 +18,12 @@ urlpatterns = [
     url(r'^search/$', views.search, name='user_search'),
 
     # AJAX methods
-    url(r'^upload_dp/$', views.upload_user_profile_pic,
+    url(r'^upload_dp/$', ajax.upload_user_profile_pic,
         name='upload_user_profile_pic'),
-    url(r'^follow/$', views.follow_user, name='follow_user'),
-    url(r'^unfollow/$', views.unfollow_user, name='unfollow_user'),
-    url(r'^post_comment/$', views.post_photo_comment, name='post_photo_comment'),
-    url(r'^like_comment/$', views.like_photo, name='like_photo'),
+    url(r'^follow/$', ajax.follow_user, name='follow_user'),
+    url(r'^unfollow/$', ajax.unfollow_user, name='unfollow_user'),
+    url(r'^post_comment/$', ajax.post_photo_comment, name='post_photo_comment'),
+    url(r'^like_comment/$', ajax.like_photo, name='like_photo'),
 ]
 
 

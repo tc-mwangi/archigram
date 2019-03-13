@@ -9,19 +9,20 @@ from board.forms import LoginForm, PhotoForm, MemberPhotoForm
 from board.models import Photo, Member, Follow, Comment, Like
 
 
-
 def index(request):
     '''displays index page
     '''
 
     if request.user.is_authenticated():
         return HttpResponseRedirect('/insta/feed')
+    
 
     return render(request, 'boardapp/index.html', {})
 
 
+@login_required
 def feed(request):
-    '''displays photo thread of following user's posts, and users posts too
+    '''displays photo thread of following user's posts, and users posts too.
     '''
 
     user = request.user
@@ -41,7 +42,7 @@ def feed(request):
         })
 
 
-
+# @login_required(login_url='/accounts/login')
 def upload_photo(request):
     '''diplays image upload form, allows user to upload photo
     '''
@@ -60,9 +61,10 @@ def upload_photo(request):
     else:
         form = PhotoForm()
 
-    return render(request, 'board/upload_photo.html', {'form': form})
+    return render(request, 'boardapp/upload_photo.html', {'form': form})
 
 
+#@login_required(login_url='/accounts/login')
 def user_profile(request):
     '''displays users's profile details
     '''
@@ -91,7 +93,7 @@ def user_profile(request):
         'dp_form': upload_prof_pic_form
         })
 
-
+#@login_required(login_url='/accounts/login')
 def users(request):
     '''displays a list of registered users
     '''
@@ -114,11 +116,7 @@ def users(request):
     return render(request, 'boardapp/users.html', {'users': userlist})
 
 
-
-
-
-
-
+#@login_required(login_url='/accounts/login')
 def user_following(request):
     '''displays users that user followers
     '''
@@ -132,7 +130,7 @@ def user_following(request):
         })
 
 
-
+#@login_required(login_url='/accounts/login')
 def user_followers(request):
     '''displays users that follow the logged in user
     '''
@@ -180,158 +178,6 @@ def search(request):
         'followlist': followlist
         })
 
-
-
-
-
-
-
-import json, itertools
-
-from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
-
-from board.forms import LoginForm, PhotoForm, MemberPhotoForm
-from board.models import Follow, Photo, Member, Comment, Like
-
-
-# Create your views here.
-
-def follow_user(request):
-    """
-    Method (AJAX) that makes the `logged user` follow the selected user
-    """
-    data = {
-            'status': 0,
-        }
-    if request.user.is_authenticated():
-        if request.method == 'POST':
-            follower = User.objects.get(pk=request.user.id)
-            following = User.objects.get(pk=request.POST['uid'])
-
-            follow = Follow(follower=follower, following=following)
-            follow.save()
-
-            # data to be returned as json
-            data = {
-                'status': 1,
-                'follower': request.user.id,
-                'to_follow': request.POST['uid']
-            }
-
-    data = json.dumps(data)
-    return HttpResponse(data, content_type='application/json')
-
-def unfollow_user(request):
-    """
-    Method (AJAX) that makes the `logged user` to unfollow a selected user
-    """
-    data = {
-        'status': 0,
-    }
-    if request.user.is_authenticated():
-        if request.method == 'POST':
-            # check if logged user is following the selected user
-            follower = User.objects.get(pk=request.user.id)
-            following = User.objects.get(pk=request.POST['uid'])
-
-            follow_obj = get_object_or_None(Follow,
-                                    follower=follower,
-                                    following=following,
-                                    active=True
-                                    )
-
-            # if is following, update `active` field to False
-            if follow_obj is not None:
-                follow_obj.active = False
-                resp = follow_obj.save()
-                # after a successful unfollow, update `data` variable's status to 1
-                data['status'] = 1
-
-    data = json.dumps(data)
-    return HttpResponse(data, content_type='application/json')
-
-def upload_user_profile_pic(request):
-    """
-    Method (AJAX) that allows the `logged user` to upload a profile pic
-    """
-    uploader = request.user
-    form = MemberPhotoForm()
-    data = {
-        'status': 1,
-    }
-
-    if request.method == 'POST':
-        form = MemberPhotoForm(request.POST, request.FILES)
-        if form.is_valid():
-
-            # check if user has already uploaded a profile picture
-            existing_dp = get_object_or_None(Member, user__pk=uploader.id)
-
-            obj = form.save(commit=False)
-            obj.user = uploader
-
-            if existing_dp is not None:
-                obj.id = existing_dp.id
-
-            obj.save()
-
-            data['status'] = 1
-
-    data = json.dumps(data)
-    return HttpResponse(data, content_type='application/json')
-
-
-
-def post_photo_comment(request):
-    data = {
-        'status': 0
-    }
-
-    if request.user.is_authenticated() and request.method == 'POST':
-        post_data = request.POST
-
-        photo = get_object_or_None(Photo, pk=post_data['photo_id'])
-        comment = Comment(
-            owner=request.user.member,
-            photo=photo,
-            text=post_data['comment_text']
-            )
-        resp = comment.save()
-        data['status'] = 1
-
-    data = json.dumps(data)
-    return HttpResponse(data, content_type='application/json')
-
-def like_photo(request):
-    data = {
-        'status': 0
-    }
-
-    # TODO: Check if like already exists
-    if request.user.is_authenticated() and request.method == 'POST':
-        post_data = request.POST
-
-        photo = get_object_or_None(Photo, pk=post_data['photo_id'])
-
-        check_like = get_object_or_None(Like,
-            owner=request.user.member,
-            photo=photo
-            )
-
-        if check_like is None:
-            like = Like(
-                owner=request.user.member,
-                photo=photo,
-                )
-            like.save()
-            data['status'] = 1
-
-    data = json.dumps(data)
-    return HttpResponse(data, content_type='application/json')
 
 
 

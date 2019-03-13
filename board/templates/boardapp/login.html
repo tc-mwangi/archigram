@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+<div id="content" class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+        <h1>Login</h1>
+        <form action="" method="post">
+        {% csrf_token %}
+            {{form.as_p}}
+            <p>
+                <button
+                    type="submit"
+                    class="btn btn-primary btn-block">
+                    Login
+                </button>
+            </p>
+        </form>
+    </div>
+
+</div>
+
