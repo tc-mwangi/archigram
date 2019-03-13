@@ -31,8 +31,9 @@
                 <a class="dropdown-item" href="{% url 'upload_photo' %}">Upload Photo</a>
                 <!-- <a class="dropdown-item" href="/accounts/password/change">Change Password</a> -->
                 <a class="dropdown-item" href="user_search">Search</a>
-                <a class="dropdown-item" href="/logout">Logout</a>
+                <a class="dropdown-item" href="{% url 'auth_logout' %}?next=/">Logout</a>
                 
+    
               </div>
             </li>
 

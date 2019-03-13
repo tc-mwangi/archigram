@@ -10,6 +10,8 @@ from board.models import Photo, Member, Follow, Comment, Like
 
 from annoying.functions import get_object_or_None
 
+
+
 def index(request):
     '''displays index page
     '''
@@ -25,7 +27,6 @@ def index(request):
 def feed(request):
     '''displays photo thread of following user's posts, and users posts too.
     '''
-
     user = request.user
     photos = []
     liked_photos = []
@@ -100,8 +101,6 @@ def user_profile(request, username=None):
     Returns:
         [type] -- [description]
     '''
-
-
     upload_prof_pic_form = MemberPhotoForm()
 
     if username is None:

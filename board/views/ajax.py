@@ -38,6 +38,7 @@ def follow_user(request):
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
 
+
 def unfollow_user(request):
     """
     Method (AJAX) that makes the `logged user` to unfollow a selected user
@@ -66,6 +67,8 @@ def unfollow_user(request):
 
     data = json.dumps(data)
     return HttpResponse(data, content_type='application/json')
+
+
 
 def upload_user_profile_pic(request):
     """

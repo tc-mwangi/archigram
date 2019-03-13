@@ -14,12 +14,12 @@
                     <div class="panel-heading">
                         {% if photo.author.member.image.url %}
                             <img
-                                src="{{ MEDIA_URL }}{{photo.author.member.image.url}}"
+                                src="{{photo.author.member.image.url}}"
                                 alt="avatar"
                                 class="img-avatar img-thumbnail">
                         {% else %}
                             <img
-                                src="{% static "boardapp/img/profile-picture-placeholder.png" %}"
+                                src="{%static 'user.png'%}"
                                 alt="dp"
                                 class="img-avatar img-thumbnail">
                         {% endif %}
@@ -28,7 +28,7 @@
                         <p>{{photo.member}}</p>
                     </div>
                     <div class="panel-body">
-                        <img src="{{ MEDIA_URL }}{{photo.image.url}}" alt="post" />
+                        <img src="{{photo.image.url}}" alt="post" />
                     </div>
                     <div class="panel-footer">
                         <p><strong>{{photo.like_set.all.count}}</strong> likes</p>
@@ -48,7 +48,7 @@
 
                             <span
                                 data-pid="{{photo.id}}"
-                                data-url="{% url 'instaapp:like_photo' %}"
+                                data-url="{% url 'like_photo' %}"
                                 {% if photo.pk in liked_photos %}
                                     class="input-group-addon like-button liked_photo"
                                 {% else %}
@@ -61,7 +61,7 @@
                             {# Comment text box #}
                             <form
                                 method="post"
-                                action="{% url 'instaapp:post_photo_comment' %}"
+                                action="{% url 'post_photo_comment' %}"
                                 class="comment-form">
                             {% csrf_token %}
                                 <input
