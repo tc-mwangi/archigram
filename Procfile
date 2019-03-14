@@ -1,0 +1,1 @@
+web: gunicorn archigram.wsgi --log-file -
