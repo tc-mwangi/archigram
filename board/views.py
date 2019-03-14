@@ -10,13 +10,11 @@ from board.models import Photo, Member, Follow, Comment, Like
 
 from annoying.functions import get_object_or_None
 
-
 import json, itertools
 
 
-
 def index(request):
-    '''displays index page
+    '''displays landing page with not logged in user navigation options
     '''
 
     if request.user.is_authenticated():
@@ -26,18 +24,22 @@ def index(request):
     return render(request, 'boardapp/index.html', {})
 
 
-
-
 @login_required(login_url='/accounts/login')
 def feed(request):
-    """
-    View that displays the uploaded photos of users that the
-    `logged user` follows
-    """
+    '''displays user's posts and following users's posts
+    
+    Arguments:
+        request {[type]} -- [description]
+    
+    Returns:
+        [type] -- [description]
+    '''
+
     user = request.user
     photos = []
     liked_photos = []
     user_following = Follow.objects.filter(follower__id=user.id)
+    print(user_following)
 
     for user_object in user_following:
         following_photos = Photo.objects.filter(author__id=user_object.following.id)
@@ -45,9 +47,7 @@ def feed(request):
         if following_photos is not None:
             photos.append(following_photos)
 
-    # flatten list of photos
-    chain = itertools.chain(*photos)
-    photos = list(chain)
+
     for photo in photos:
         photo_like = get_object_or_None(Like,
            
@@ -61,20 +61,6 @@ def feed(request):
         'liked_photos': liked_photos
         })
 
-    
-
-   
-
-    
-   
-
-
-
-
-
-
-
-
 
 @login_required(login_url='/accounts/login')
 def users(request, ):
@@ -82,6 +68,7 @@ def users(request, ):
     '''
     userlist = []
     users = User.objects.all()
+    print(users)
 
     for user in users:
         queryset = Follow.objects.filter(
@@ -90,6 +77,7 @@ def users(request, ):
                             
                             )
         follow_status = get_object_or_None(queryset)
+        print(follow_status)
 
         if follow_status is None:
             userlist.append(user)
@@ -149,6 +137,7 @@ def user_profile(request, username=None):
 
     user_photos = Photo.objects.filter(author__pk = user.id)
     photos_count = user_photos.count()
+    print(photos_count)
     return render(request, 'boardapp/profile.html', {
         'user': user,
         'user_dp': user_dp,
@@ -160,9 +149,9 @@ def user_profile(request, username=None):
 
 def upload_user_profile_pic(request):
     """
-    Method (AJAX) that allows the `logged user` to upload a profile pic
+    ajax method for profile photo image upload
     """
-    uploader = request.user
+    user_uploading = request.user
     form = MemberPhotoForm()
     data = {
         'status': 1,
@@ -173,10 +162,10 @@ def upload_user_profile_pic(request):
         if form.is_valid():
 
             # check if user has already uploaded a profile picture
-            existing_dp = get_object_or_None(Member, user__pk=uploader.id)
+            existing_dp = get_object_or_None(Member, user__pk=user_uploading.id)
 
             obj = form.save(commit=False)
-            obj.user = uploader
+            obj.user = user_uploading
 
             if existing_dp is not None:
                 obj.id = existing_dp.id
@@ -253,7 +242,7 @@ def search(request):
 
 
 def see(request,username=None):
-    '''displays html views for testing visual aspects
+    '''displays html views for testing visual aspects of the app
     '''
     if username is None:
         user = request.user
