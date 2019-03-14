@@ -24,11 +24,13 @@ def index(request):
 
 
 @login_required(login_url='/accounts/login')
-def feed(request):
+def feed(request, username=None):
     '''displays photo thread of following user's posts, and users posts too.
     '''
+    
     user = request.user
     photos = []
+    user_photos = Photo.objects.filter(author__pk = user.id)
     liked_photos = []
     user_following = Follow.objects.filter(follower__id=user.id)
 
@@ -39,13 +41,29 @@ def feed(request):
             photos.append(following_photos)
 
     return render(request, 'boardapp/feed.html', {
+        'user': user,
+        'user_photos': user_photos,
         'photos': photos,
         'liked_photos': liked_photos
         })
 
+    
+
+   
+
+    
+   
+
+
+
+
+
+
+
+
 
 @login_required(login_url='/accounts/login')
-def users(request):
+def users(request, ):
     '''displays a list of registered users
     '''
     userlist = []
@@ -177,8 +195,7 @@ def search(request):
         for user in results:
             queryset = Follow.objects.filter(
                                 follower__pk=request.user.id,
-                                following__pk=user.pk,
-                                active=True
+                                following__pk=user.pk
                                 )
             follow_status = get_object_or_None(queryset)
 
@@ -193,7 +210,7 @@ def search(request):
 
 
 def see(request,username=None):
-    '''displays logged in user's customized navbar options
+    '''displays html views for testing visual aspects
     '''
     if username is None:
         user = request.user
@@ -211,7 +228,7 @@ def see(request,username=None):
 
     
 
-    return render(request, 'boardapp/navbar.html', {
+    return render(request, 'boardapp/see.html', {
         'user': user,
         'user_dp': user_dp,
         'photos': user_photos,

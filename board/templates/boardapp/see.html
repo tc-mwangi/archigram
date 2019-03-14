@@ -1,123 +1,78 @@
 {%extends 'main/base.html'%}
 {%load bootstrap4%}
-{% load static %}
 
 {%block content%}
 {{block.supper}}
 
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-4" id="still-column">
+                
+                
+            </div>
 
-<!--Navbar -->
-<nav class="mb-1 navbar navbar-expand-lg  lighten-1">
-        <a class="navbar-brand" href="{% url 'index' %}">
-                <img src="{%static 'logo-blue.png'%}" height="100" class="d-inline-block align-top"
-                  alt="mdb logo">
-              </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
-          aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Home
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Timeline</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Users</a>
-            </li>
-         
-          </ul>
-          <ul class="navbar-nav ml-auto nav-flex-icons">
-            
-            <li class="nav-item avatar dropdown">
-              <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                {% if user_dp %}
-                <img src="{{user_dp.image.url}}" class="rounded-circle z-depth-0" alt="avatar image" height="50">
-                {% else %}
-                <img src="{%static 'user.png'%}" class="rounded-circle z-depth-0" alt="avatar image" height="50">
-              </a>
-              {% endif %}
-              <div class="dropdown-menu dropdown-menu-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-55">
-                <a class="dropdown-item" href="#">Profile</a>
-                <a class="dropdown-item" href="#">Followers</a>
-                <a class="dropdown-item" href="#">Logout</a>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <!--/.Navbar -->
-
-
-  
-
-       
-      
-
-      
-
-
-
-        
-        <section class="view">
-      
-                <div class="row">
-            
-                  <div class="col-md-6">
-                      <!-- <h1>Followers</h1> -->
-                                <!--Beginning of card-->
-        <div class="" id="user_block">
-          <div class="card card-cascade">
-      
-                <!--Card image-->
-                <div class="view view-cascade overlay">
-                  <img src="https://mdbootstrap.com/img/Photos/Others/men.jpg" class="card-img-top" alt="user_pic">
-                  <a>
-                    <div class="mask rgba-white-slight"></div>
-                  </a>
-                </div>
-                <!--/.Card image-->
-          
-                <!--Card content-->
-                <div class="card-body card-body-cascade text-center">
-                  <!--Title-->
-                  <h4 class="card-title"><strong>@Username</strong></h4>
-                  <!-- <h5>@username</h5> -->
-          
-                  <p class="card-text">no. followers, no. following
+            <div class="col-lg-8 center" id="scrolling-column">
                     
-                <p class="card-text">posts</p>
-          
-                  <!--Follow Button-->
-                  <a type="button" class="btn-floating btn-small btn-fb"><i class="fas fa-plus"></i><br></a>
-                  <br>
-                  <a type="button" class="btn-floating btn-small btn-fb"><i class="fas fa-minus"></i></i><br></a>
-                </div>
-                <!--/.Card content-->
-          
-              </div>
-              <!--/End of Card-->
-                      
-                    
-            
+                            
+                        
+
+                <!-- Section: Social news card -->
+                <section class="my-5">
+                        
+                    <!-- Grid row -->
+                    <div class="row">
+                            
+                        <!-- Grid column -->
+                        <div class="col-md-6 col-lg-4">
+                                
+                            <!-- Card -->
+                            <div class="card news-card">
+                                <!-- Heading-->
+                                <div class="card-body">
+                                    <div class="content">
+                                        <!-- <div class="right-side-meta">14 h</div> -->
+                                        <img src="https:///images.unsplash.com/photo-1528325329579-605078ee56fb?w=152&h=152&fit=crop&crop=faces"
+                                            class="rounded-circle avatar-img z-depth-1-half ">username
+                                    </div>
+                                </div>
+                                <!-- Card image-->
+                                <img class="card-img-top" src="https://images.unsplash.com/photo-1469539188336-fcd3b39d5efb?w=500&h=500&fit=crop"
+                                    alt="Card image cap">
+                                <!-- Card content -->
+                                <div class="card-body">
+                                    <!-- Social meta-->
+                                    <div class="social-meta">
+                                        <p>What a beautiful building </p>
+                                        <span><i class="far fa-heart"></i>25 likes</span>
+                                        <p><i class="fas fa-comment"></i>13 comments</p>
+                                    </div>
+                                    <hr>
+                                    <!-- Comment input -->
+                                    <div class="md-form">
+                                        <i class="far fa-heart prefix"></i>
+                                        <input placeholder="Add Comment..." type="text" id="form5" class="form-control">
+                                    </div>
+
+                                </div>
+                                <!-- Card content -->
+
+                            </div>
+                            <!-- Card -->
+
+                        </div>
+                        <!-- Grid column -->
+
+                    </div>
+                    <!-- Grid row -->
+
+                </section>
+                <!-- Section: Social news card -->
+
+
             </div>
         </div>
-            
-                  <div class="col-md-6">
-                        <!-- <h1>Following</h1> -->
-                        
-            
-                    
-            
-                  </div>
-            
-                </div>
-            
-              </section>
-              
+    </div>
+</body>
+
 {%endblock%}

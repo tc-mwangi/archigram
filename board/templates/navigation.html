@@ -15,10 +15,6 @@
     {% if user.is_authenticated %}
       <ul class="navbar-nav mr-auto">
         
-        <li class="nav-item active">
-
-          
-        </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'feed' %}">Timeline</a>
         </li>
@@ -33,6 +29,23 @@
           </li>
               
       </ul>
+      <div>
+      <form
+      action="{% url 'user_search' %}"
+      method="GET"
+      id="formSearch"
+      class="form-inline"
+      role="search">
+      <div class="form-group">
+        <input
+              name="q"
+              type="text"
+              class="form-control"
+              placeholder="search">
+      </div>
+      <button type="submit" class="btn btn-outline-blue btn-md my-2 my-sm-0 ml-3">Submit</button>
+  </form>
+</div>
       <ul class="navbar-nav ml-auto nav-flex-icons">
         
         <li class="nav-item avatar dropdown">

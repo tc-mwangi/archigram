@@ -1,6 +1,10 @@
-{% load staticfiles %}
-{% include 'instaapp/includes/head.html' %}
-{% include 'instaapp/includes/nav.html' %}
+{%extends 'main/base.html'%}
+{%load bootstrap4%}
+{% load static %}
+
+{%block content%}
+{{block.supper}}
+
 <div id="content" class="container">
     <div class="col-sm-6 col-sm-offset-3">
         <h1>Search Results</h1>
@@ -8,12 +12,12 @@
             <div class="well user-card">
                 {% if user.member.image.url %}
                     <img
-                        src="{{ MEDIA_URL }}{{user.member.image.url}}"
+                        src="{{user.member.image.url}}"
                         alt="{{user.username}}"
                         class="img-avatar img-thumbnail" />
                 {% else %}
                     <img
-                        src="{% static "instaapp/img/profile-picture-placeholder.png" %}"
+                        src="{%static 'user.png'%}"
                         alt="dp"
                         class="img-avatar img-thumbnail">
                 {% endif %}
@@ -45,11 +49,11 @@
         <div class="modal-content">
             <div class="modal-body">
                 <p>You are not logged in.</p>
-                <p>To follow this user, login <a href="{% url 'instaapp:user_login' %}">here</a></p>
+                <p>To follow this user, login <a href="/accounts/login">here</a></p>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-{% include 'instaapp/includes/foot.html' %}
-<script src="{% static "instaapp/js/follow.js" %}"></script>
+{%endblock%}
+
