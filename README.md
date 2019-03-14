@@ -53,11 +53,11 @@ Then visit http://localhost:8000 to view the app.
 ### BDD
 |     | Behaviour    |          Input                | Output    | 
 |--- | ---         |     ---      |          --- |
-|  1. | login registered User |  display login form   | redirect user to their timeline  |
-|  2. | sign up new User | display sign up form   | save user details, redirect to signup  |
-|  3. | enable image uploads |  display image uploads form  |  save, display image on user's timeline  |
-|  4. | view profile, display image uploads  | |  redirect to selected location page  |
-|  5. | follow or unfolow other users |  display buttons next to user's profile  | add or subtract to number of followers  |
+|  1. | login registered User |  display login form   | redirect user to their profile page  |
+|  2. | sign up new User | display sign up form   | save user details, redirect to signup, redirect to login after signup |
+|  3. | enable image uploads |  display image uploads form  |  save, display image on user's timeline and also on timeline  |
+|  4. | enable profile photo upload | display upload form|  redirect to profile page after post |
+|  5. | follow or unfolow other users |  display navigation options to view followers and following  | add or subtract to number of followers, diplay following  posts on users timeline  |
 |  6. | like a post |  display like button  | add or subtract to likes counter |
 |  7. | comment on a post |  display comment form  | display comment feed  |
 

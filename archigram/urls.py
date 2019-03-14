@@ -20,7 +20,7 @@ from django.contrib.auth import views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from board.views import views
+from board import views
 
 
 urlpatterns = [

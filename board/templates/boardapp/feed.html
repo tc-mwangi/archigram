@@ -76,25 +76,6 @@
                                     aria-describedby="sizing-addon3" />
                             </form>
 
-                            {# Options dropdown #}
-                            <div class="input-group-btn">
-                                <button
-                                type="button"
-                                class="btn btn-default dropdown-toggle"
-                                data-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                    <span
-                                    class="pull-right glyphicon glyphicon-option-horizontal"></span>
-                                </button>
-                                <ul class="dropdown-menu dropdown-menu-right">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -103,12 +84,71 @@
             <div class="alert alert-info">
                 You are not following any users. <a href="{% url 'users' %}">Follow</a> users to view photos.
             </div>
-            {% for user_photo in user_photos %}
-                <div class="col-sm-3">
-                    <img class="img-responsive img-rounded" src="{{photo.image.url}}" alt="{{photo.caption}}" title="{{photo.caption}}" height="100"/>
-                    <h3>{{photo.caption}}</h3>
-                </div>
-            {% endfor %}
+            <!-- default -->
+
+<div class="panel panel-default panel-post">
+        <div class="panel-heading">
+                <img
+                    src="{%static 'user.png'%}"
+                    alt="avatar"
+                    class="img-avatar img-thumbnail">
+            <span class="panel-title">username</span>
+            <span class="pull-right">timestamp</span>
+            <p>photo.member</p>
+        </div>
+        <div class="panel-body">
+            <img src="{%static 'user.png'%}" alt="post" />
+        </div>
+        <div class="panel-footer">
+            <p><strong>likes count</strong> likes</p>
+            <p>
+                <strong>username</strong>
+                &nbsp;caption
+            </p>
+            
+                <p class="photo-comment">
+                    <strong>author</strong>
+                    &nbsp;text
+                </p>
+            
+            <hr />
+            <div class="input-group input-group-sm">
+                
+
+                <span
+                    data-pid=""
+                    data-url=""
+                    
+                        class="input-group-addon like-button liked_photo"
+                    
+                        class="input-group-addon like-button"
+                   
+                    >
+                    <span class="glyphicon glyphicon-heart"></span>
+                </span>
+
+               
+                <form
+                    method="post"
+                    action=""
+                    class="comment-form">
+                
+                    <input
+                        type="hidden"
+                        name=""
+                        value="" />
+                    <input
+                        name="comment_text"
+                        type="text"
+                        class="form-control"
+                        placeholder="Comment..."
+                        aria-describedby="sizing-addon3" />
+                </form>
+
+            </div>
+        </div>
+    </div>
+            
         {% endif %}
 
     </div>
@@ -116,4 +156,70 @@
 </div>
 
 {%endblock%}
+
+
+
+
+<div class="panel panel-default panel-post">
+        <div class="panel-heading">
+                <img
+                    src="{%static 'user.png'%}"
+                    alt="avatar"
+                    class="img-avatar img-thumbnail">
+            <span class="panel-title">username</span>
+            <span class="pull-right">timestamp</span>
+            <p>photo.member</p>
+        </div>
+        <div class="panel-body">
+            <img src="{%static 'user.png'%}" alt="post" />
+        </div>
+        <div class="panel-footer">
+            <p><strong>likes count</strong> likes</p>
+            <p>
+                <strong>username</strong>
+                &nbsp;caption
+            </p>
+            
+                <p class="photo-comment">
+                    <strong>author</strong>
+                    &nbsp;text
+                </p>
+            
+            <hr />
+            <div class="input-group input-group-sm">
+                
+
+                <span
+                    data-pid=""
+                    data-url=""
+                    
+                        class="input-group-addon like-button liked_photo"
+                    
+                        class="input-group-addon like-button"
+                   
+                    >
+                    <span class="glyphicon glyphicon-heart"></span>
+                </span>
+
+               
+                <form
+                    method="post"
+                    action=""
+                    class="comment-form">
+                
+                    <input
+                        type="hidden"
+                        name=""
+                        value="" />
+                    <input
+                        name="comment_text"
+                        type="text"
+                        class="form-control"
+                        placeholder="Say something..."
+                        aria-describedby="sizing-addon3" />
+                </form>
+
+            </div>
+        </div>
+    </div>
 

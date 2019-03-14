@@ -22,7 +22,7 @@ class PhotoForm(forms.ModelForm):
         widgets = {
             'caption': forms.Textarea(attrs={
                 'class': 'form-control',
-                'rows': 3
+                'rows': 4
                 })
         }
 

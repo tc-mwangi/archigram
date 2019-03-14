@@ -140,3 +140,9 @@ LOGIN_REDIRECT_URL = '/insta/profile'
 LOGIN_URL = '/index'
 
 
+
+
+
+
+
+

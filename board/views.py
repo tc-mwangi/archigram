@@ -11,6 +11,9 @@ from board.models import Photo, Member, Follow, Comment, Like
 from annoying.functions import get_object_or_None
 
 
+import json, itertools
+
+
 
 def index(request):
     '''displays index page
@@ -23,14 +26,16 @@ def index(request):
     return render(request, 'boardapp/index.html', {})
 
 
+
+
 @login_required(login_url='/accounts/login')
-def feed(request, username=None):
-    '''displays photo thread of following user's posts, and users posts too.
-    '''
-    
+def feed(request):
+    """
+    View that displays the uploaded photos of users that the
+    `logged user` follows
+    """
     user = request.user
     photos = []
-    user_photos = Photo.objects.filter(author__pk = user.id)
     liked_photos = []
     user_following = Follow.objects.filter(follower__id=user.id)
 
@@ -40,9 +45,18 @@ def feed(request, username=None):
         if following_photos is not None:
             photos.append(following_photos)
 
+    # flatten list of photos
+    chain = itertools.chain(*photos)
+    photos = list(chain)
+    for photo in photos:
+        photo_like = get_object_or_None(Like,
+           
+            photo=photo
+            )
+        if photo_like:
+            liked_photos.append(photo.pk)
+
     return render(request, 'boardapp/feed.html', {
-        'user': user,
-        'user_photos': user_photos,
         'photos': photos,
         'liked_photos': liked_photos
         })
@@ -144,6 +158,35 @@ def user_profile(request, username=None):
         })
 
 
+def upload_user_profile_pic(request):
+    """
+    Method (AJAX) that allows the `logged user` to upload a profile pic
+    """
+    uploader = request.user
+    form = MemberPhotoForm()
+    data = {
+        'status': 1,
+    }
+
+    if request.method == 'POST':
+        form = MemberPhotoForm(request.POST, request.FILES)
+        if form.is_valid():
+
+            # check if user has already uploaded a profile picture
+            existing_dp = get_object_or_None(Member, user__pk=uploader.id)
+
+            obj = form.save(commit=False)
+            obj.user = uploader
+
+            if existing_dp is not None:
+                obj.id = existing_dp.id
+
+            obj.save()
+
+            data['status'] = 1
+
+    data = json.dumps(data)
+    return HttpResponse(data, content_type='application/json')
 
 
 @login_required(login_url='/accounts/login')
